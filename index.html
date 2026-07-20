@@ -577,9 +577,9 @@
     <div class="particles-container" id="particles"></div>
 
     <!-- Audio -->
-<audio id="bg-audio" loop autoplay muted playsinline preload="auto">
-    <source src="muson.m4a" type="audio/mp4">
-</audio>
+    <audio id="bg-audio" loop preload="auto">
+        <source src="aud.mp3" type="audio/mpeg">
+    </audio>
     <button class="audio-btn" id="audioBtn" onclick="toggleAudio()" aria-label="Музыка">
         <svg viewBox="0 0 24 24" id="audioIcon">
             <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
@@ -729,6 +729,32 @@
     </div>
 
     <script>
+        // ===== AUDIO (declared first, so the button works immediately) =====
+        // Источник правды — audio.paused, а не отдельные флаги, чтобы не было рассинхронизации.
+        const audio = document.getElementById('bg-audio');
+        const audioBtn = document.getElementById('audioBtn');
+        const audioIcon = document.getElementById('audioIcon');
+        let audioStarted = false; // нужен только для авто-старта при первом скролле
+
+        const iconPlay = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>`;
+        const iconMute = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>`;
+
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play().then(() => {
+                    audioStarted = true;
+                    audioBtn.classList.add('playing');
+                    audioIcon.innerHTML = iconPlay;
+                }).catch((err) => {
+                    console.error('Аудио ойнотулган жок:', err);
+                });
+            } else {
+                audio.pause();
+                audioBtn.classList.remove('playing');
+                audioIcon.innerHTML = iconMute;
+            }
+        }
+
         // ===== LOADING SCREEN =====
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -774,85 +800,14 @@
             observer.observe(section);
         });
 
-        // ===== COUNTDOWN TIMER =====
-        const weddingDate = new Date('2026-08-17T16:00:00').getTime();
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-
-            if (distance > 0) {
-                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-                document.getElementById('days').textContent = String(days).padStart(2, '0');
-                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
-            }
-        }
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-
-        // ===== AUDIO =====
-        // Стратегия: аудио стартует замьюченным сразу при загрузке (это разрешают
-        // почти все браузеры). При первом же взаимодействии пользователя со страницей
-        // (клик, скролл, тач, нажатие клавиши) звук автоматически включается по-настоящему.
-        let isPlaying = false;
-        let unmuted = false;
-        const audio = document.getElementById('bg-audio');
-        const audioBtn = document.getElementById('audioBtn');
-        const audioIcon = document.getElementById('audioIcon');
-
-        const iconPlay = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>`;
-        const iconMute = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>`;
-
-        // Пытаемся запустить сразу (замьюченным, чтобы браузер точно разрешил)
-        window.addEventListener('load', () => {
-            audio.play().then(() => {
-                isPlaying = true;
-                audioBtn.classList.add('playing');
-                audioIcon.innerHTML = iconMute; // показываем "заглушено", пока не снят mute
-            }).catch(() => {});
-        });
-
-        function unmuteOnFirstInteraction() {
-            if (unmuted) return;
-            unmuted = true;
-            audio.muted = false;
-            audio.play().then(() => {
-                isPlaying = true;
-                audioBtn.classList.add('playing');
-                audioIcon.innerHTML = iconPlay;
-            }).catch(() => {});
-        }
-
-        ['click', 'scroll', 'touchstart', 'keydown', 'wheel'].forEach(evt => {
-            document.addEventListener(evt, unmuteOnFirstInteraction, { once: true, passive: true });
-        });
-
-        // Кнопка вручную ставит на паузу/возобновляет (и снимает mute при первом клике)
-        function toggleAudio() {
-            unmuteOnFirstInteraction();
-            if (isPlaying) {
-                audio.pause();
-                isPlaying = false;
-                audioBtn.classList.remove('playing');
-                audioIcon.innerHTML = iconMute;
-            } else {
-                audio.muted = false;
-                audio.play().then(() => {
-                    isPlaying = true;
-                    audioBtn.classList.add('playing');
-                    audioIcon.innerHTML = iconPlay;
-                }).catch(() => {});
-            }
-        }
+        // ===== AUTO-START AUDIO ON FIRST SCROLL =====
+        const scrollContainer = document.getElementById('scrollContainer');
+        scrollContainer.addEventListener('scroll', function autoStart() {
+            if (audio.paused && !audioStarted) toggleAudio();
+            scrollContainer.removeEventListener('scroll', autoStart);
+        }, { once: true });
 
         // ===== SCROLL TO NEXT =====
-        const scrollContainer = document.getElementById('scrollContainer');
         function scrollToNext() {
             const current = scrollContainer.scrollTop;
             const sections = document.querySelectorAll('.page-section');
