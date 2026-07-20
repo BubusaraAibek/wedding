@@ -1,458 +1,625 @@
 <!DOCTYPE html>
 <html lang="ky">
 <head>
-  <meta charset="UTF-8" />
-  <title>Тойго чакыруу</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Айбек & Бубусара — Кыз узатуу</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F7FAFD;
+    --cream-2:#EAF2F9;
+    --sky:#9FC1DE;
+    --sky-deep:#33526E;
+    --sky-mid:#6E93B4;
+    --gold:#CBA36B;
+    --gold-light:#E7D4AC;
+    --ink:#3E4A56;
+    --powder:#D7E6F2;
+    --blue:#AFCBE3;
+    --shadow: 0 14px 40px rgba(51,82,110,.16);
+    --shadow-soft: 0 6px 20px rgba(51,82,110,.10);
+  }
 
-  <!-- ==================== OPEN GRAPH / SOCIAL PREVIEW META ==================== -->
-  <meta property="og:title" content="Бубусара & Айбек — Тойго чакыруу">
-  <meta property="og:description" content="17-август, 2026-жыл, саат 16:00. Ош шаары, «Динат» ресторанында үйлөнүү тоюбузга сизди чакырабыз!">
-  <meta property="og:image" content="https://bubusaraaibek.github.io/wedding/pr.png">
-  <meta property="og:url" content="https://bubusaraaibek.github.io/wedding/">
-  <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:type" content="image/jpeg">
-  <!-- ============================================================================ -->
+  *{box-sizing:border-box; margin:0; padding:0;}
 
-  <!-- Кириллицаны колдогон шрифттор гана -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,500;1,600&family=Marck+Script&family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  html{scroll-behavior:smooth;}
 
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
+  body{
+    background: var(--cream);
+    color: var(--ink);
+    font-family:'Montserrat', sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
 
-    /* Нижний фон */
-    .bg-bottom {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('img4.png') center/cover no-repeat;
-      z-index: -2;
-    }
+  .wrap{
+    max-width:480px;
+    margin:0 auto;
+    position:relative;
+    background:
+      radial-gradient(circle at 12% 6%, rgba(203,163,107,.14), transparent 42%),
+      radial-gradient(circle at 88% 14%, rgba(159,193,222,.30), transparent 40%),
+      radial-gradient(circle at 85% 94%, rgba(111,147,180,.16), transparent 48%),
+      repeating-linear-gradient(135deg, rgba(203,163,107,.035) 0 2px, transparent 2px 34px),
+      var(--cream);
+    min-height:100vh;
+  }
 
-    /* Верхний фон */
-    .bg-top {
-      position: fixed;
-      top: -70px;
-      left: 0;
-      width: 100%;
-      height: 130%;
-      background: url('IMG_20250911_131038.jpg') center top/cover no-repeat;
-      z-index: -1;
-    }
+  section{
+    padding:64px 28px;
+    position:relative;
+  }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: 'Bona Nova SC', serif;
-      font-size: 10px;
-      color: #3a3a3a;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-    }
+  h1,h2,h3, .script{
+    font-family:'Playfair Display', serif;
+  }
 
-    .container {
-      width: 90%;
-      max-width: 400px;
-      padding: 40px 0;
-      position: relative;
-      z-index: 1;
-    }
+  /* ---------- reveal on scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1);
+  }
+  .reveal.visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .reveal-delay-1.visible{ transition-delay:.12s; }
+  .reveal-delay-2.visible{ transition-delay:.24s; }
+  .reveal-delay-3.visible{ transition-delay:.36s; }
 
-    h1 {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-weight: 600;
-      font-size: 44px;
-      margin: 0 0 4px;
-      text-align: center;
-      margin-top:40px;
-      user-select: none;
-      color: #000;
-      text-shadow: 1px 1px 6px rgba(255,255,255,0.6);
-    }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1; transform:none; transition:none;}
+    .ornament path{stroke-dashoffset:0 !important; animation:none !important;}
+  }
 
-    .card {
-      background: rgba(255, 255, 255, 0.88);
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      overflow: hidden;
-      padding-bottom: 20px;
-      animation: cardIn 1s ease-out both;
-    }
+  /* ---------- ornament divider (kyrgyz kochkor-muyuz motif) ---------- */
+  .ornament{
+    width:130px;
+    height:42px;
+    margin:0 auto;
+    display:block;
+    overflow:visible;
+  }
+  .ornament path{
+    fill:none;
+    stroke:var(--gold);
+    stroke-width:1.6;
+    stroke-linecap:round;
+    stroke-dasharray:400;
+    stroke-dashoffset:400;
+  }
+  .ornament.visible path{
+    animation:draw 1.6s ease forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
 
-    .section {
-      padding: 20px 20px 0;
-      text-align: center;
-      border-bottom: 1px solid #eee;
-    }
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:52px 22px 40px;
+    position:relative;
+  }
+  .hero-frame{
+    position:absolute;
+    inset:14px;
+    border:1px solid var(--gold);
+    pointer-events:none;
+  }
+  .hero-frame::before{
+    content:"";
+    position:absolute;
+    inset:5px;
+    border:1px solid rgba(203,163,107,.45);
+    pointer-events:none;
+  }
+  .hero-frame .corner{
+    position:absolute;
+    width:30px; height:30px;
+    border:1.4px solid var(--gold);
+  }
+  .hero-frame .corner.tl{ top:-9px; left:-9px; border-right:none; border-bottom:none; }
+  .hero-frame .corner.tr{ top:-9px; right:-9px; border-left:none; border-bottom:none; }
+  .hero-frame .corner.bl{ bottom:-9px; left:-9px; border-right:none; border-top:none; }
+  .hero-frame .corner.br{ bottom:-9px; right:-9px; border-left:none; border-top:none; }
 
-    .section:last-child {
-      border-bottom: none;
-    }
+  .eyebrow{
+    letter-spacing:.42em;
+    font-size:12px;
+    color:var(--sky-deep);
+    font-weight:600;
+    text-transform:uppercase;
+  }
+  .hero .ornament{ margin:16px auto 22px; }
 
-    /* ---- Кол турушкандардын аты-жөнү ---- */
-    .couple-names {
-      font-family: 'Marck Script', cursive;
-      font-size: 46px;
-      line-height: 1.3;
-      color: #9a5f57;
-      margin: 6px 0 18px;
-      animation: fadeInUp 1.1s ease-out both;
-    }
-    .couple-names .and-sym {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 24px;
-      color: #c79b93;
-      margin: 0 8px;
-    }
+  /* ---------- large bride photo ---------- */
+  .photo-frame{
+    width:min(76vw, 300px);
+    height:min(94vw, 368px);
+    border-radius:150px 150px 18px 18px;
+    margin:0 auto 26px;
+    position:relative;
+    overflow:hidden;
+    border:5px solid var(--gold-light);
+    box-shadow:var(--shadow), 0 0 0 1px var(--gold) inset;
+    background:linear-gradient(160deg, var(--blue), var(--powder));
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .photo-frame::after{
+    content:"";
+    position:absolute;
+    inset:8px;
+    border:1px solid rgba(255,255,255,.65);
+    border-radius:140px 140px 12px 12px;
+    pointer-events:none;
+  }
+  .photo-frame .placeholder-text{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:16px;
+    color:var(--sky-deep);
+    text-align:center;
+    line-height:1.4;
+    opacity:.8;
+    padding:0 20px;
+  }
+  .photo-frame img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 18%;
+  }
 
-    .greeting {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 22px;
-      margin: 10px 0 12px;
-      animation: fadeInUp 1s ease-out both;
-      animation-delay: 0.1s;
-    }
+  .names{
+    font-size:clamp(38px, 11vw, 54px);
+    font-weight:600;
+    font-style:italic;
+    color:var(--sky-deep);
+    line-height:1.15;
+    margin-top:4px;
+  }
+  .names .amp{
+    display:block;
+    color:var(--gold);
+    font-size:.55em;
+    margin:6px 0;
+  }
 
-    .guest-name {
-      display: block;
-      font-family: 'Marck Script', cursive;
-      font-size: 32px;
-      margin: 4px 0 2px;
-      color: #b97c7c;
-    }
+  .hero-sub{
+    margin-top:22px;
+    font-size:14px;
+    letter-spacing:.06em;
+    color:var(--ink);
+    opacity:.75;
+  }
 
-    .message {
-      font-size: 15px;
-      line-height: 1.7;
-      margin: 0 0 24px;
-      animation: fadeInUp 1s ease-out both;
-      animation-delay: 0.2s;
-    }
+  .scroll-cue{
+    margin-top:40px;
+    font-size:11px;
+    letter-spacing:.3em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+  }
+  .scroll-cue span{
+    width:1px; height:34px;
+    background:linear-gradient(var(--gold), transparent);
+    animation:cue 1.8s ease-in-out infinite;
+  }
+  @keyframes cue{
+    0%,100%{ transform:scaleY(1); opacity:.5;}
+    50%{ transform:scaleY(1.3); opacity:1;}
+  }
 
-    /* ---- Дата ---- */
-    .date-block {
-      margin: 6px 0 26px;
-      animation: fadeInUp 1s ease-out both;
-      animation-delay: 0.3s;
-    }
-    .date-block .day-word {
-      font-size: 13px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: #999;
-      margin-bottom: 6px;
-    }
-    .date-block .date-main {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 30px;
-      color: #9a5f57;
-      letter-spacing: 1px;
-    }
-    .date-block .date-time {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 18px;
-      color: #666;
-      margin-top: 4px;
-    }
+  /* ---------- GREETING ---------- */
+  .greeting{ text-align:center; }
+  .guest-name{
+    font-size:clamp(24px,7vw,30px);
+    font-style:italic;
+    color:var(--sky-deep);
+    margin-bottom:18px;
+  }
+  .greeting p{
+    font-size:15.5px;
+    color:var(--ink);
+    opacity:.9;
+  }
+  .parents{
+    margin-top:30px;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:clamp(19px, 5.6vw, 23px);
+    letter-spacing:.02em;
+    color:var(--sky-deep);
+    font-weight:600;
+  }
 
-    .final-text {
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 19px;
-      margin: 4px 0 14px;
-      color: #444;
-    }
+  /* ---------- COUNTDOWN ---------- */
+  .countdown-section{
+    background:linear-gradient(155deg, var(--powder), var(--blue));
+    color:var(--sky-deep);
+    text-align:center;
+    border-radius:16px;
+    margin:0 16px;
+    padding:30px 20px;
+    box-shadow:var(--shadow-soft);
+    border:1px solid rgba(255,255,255,.6);
+  }
+  .countdown-section .eyebrow{ color:var(--sky-deep); opacity:.75; }
+  .countdown-section h2{
+    font-size:16px;
+    font-weight:500;
+    font-style:italic;
+    margin:6px 0 18px;
+  }
+  .timer{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+  }
+  .timer .cell{
+    background:rgba(255,255,255,.6);
+    border:1px solid rgba(203,163,107,.3);
+    border-radius:8px;
+    padding:9px 2px;
+    width:50px;
+    box-shadow:0 4px 10px rgba(51,82,110,.08);
+  }
+  .timer .num{
+    font-family:'Playfair Display', serif;
+    font-size:18px;
+    font-weight:700;
+    color:var(--sky-deep);
+    display:block;
+    font-variant-numeric: tabular-nums;
+  }
+  .timer .label{
+    font-size:8px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    opacity:.7;
+    margin-top:2px;
+    display:block;
+  }
 
-    .calendar {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
-      justify-items: center;
-      font-size: 15px;
-      margin: 0 10px 20px;
-    }
+  /* ---------- DATE / CALENDAR ---------- */
+  .date-section{ text-align:center; }
+  .date-big{
+    font-size:clamp(30px,9vw,38px);
+    font-style:italic;
+    color:var(--sky-deep);
+    margin:8px 0 4px;
+  }
+  .date-time{
+    font-size:14px;
+    color:var(--sky-deep);
+    letter-spacing:.05em;
+    margin-bottom:30px;
+  }
 
-    .calendar div {
-      padding: 5px 0;
-      border-radius: 4px;
-      user-select: none;
-    }
+  .calendar{
+    background:#fff;
+    border:1px solid var(--powder);
+    border-radius:12px;
+    padding:22px 16px 26px;
+    box-shadow:var(--shadow-soft);
+  }
+  .cal-month{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-size:17px;
+    color:var(--sky-deep);
+    margin-bottom:14px;
+  }
+  .cal-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:6px;
+  }
+  .cal-grid .dow{
+    font-size:10px;
+    letter-spacing:.05em;
+    color:var(--gold);
+    font-weight:600;
+    text-transform:uppercase;
+    padding-bottom:4px;
+  }
+  .cal-grid .day{
+    font-size:13px;
+    color:var(--ink);
+    padding:8px 0;
+    border-radius:50%;
+    opacity:.75;
+  }
+  .cal-grid .day.empty{ visibility:hidden; }
+  .cal-grid .day.highlight{
+    background:var(--sky-deep);
+    color:#fff;
+    font-weight:700;
+    opacity:1;
+    box-shadow:0 4px 12px rgba(51,82,110,.35);
+  }
 
-    .calendar .marked {
-      background: #f3d1c8;
-      font-weight: bold;
-      border-radius: 50px;
-      animation: pulseMark 2.2s ease-in-out infinite;
-    }
+  /* ---------- LOCATION ---------- */
+  .location{ text-align:center; }
+  .venue-name{
+    font-size:clamp(24px,7vw,30px);
+    font-style:italic;
+    color:var(--sky-deep);
+    margin:10px 0 6px;
+  }
+  .venue-city{
+    font-size:14px;
+    color:var(--ink);
+    opacity:.8;
+    margin-bottom:26px;
+  }
+  .map-btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:linear-gradient(135deg, var(--sky-deep), var(--sky-mid));
+    color:var(--cream);
+    text-decoration:none;
+    padding:13px 26px;
+    border-radius:30px;
+    font-size:13px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    font-weight:600;
+    box-shadow:var(--shadow);
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .map-btn:active{ transform:scale(.96); }
+  .map-btn:hover{ box-shadow:0 16px 34px rgba(51,82,110,.24); }
 
-    .info {
-      margin: 0 0 20px;
-      font-size: 15px;
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    a {
-      color: #333;
-    }
-
-    .map-link {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 6px 14px;
-      background-color: transparent;
-      border: 2px solid #f3d1c8;
-      border-radius: 100px;
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      transition: all 0.3s;
-    }
-
-    .map-link:hover {
-      background-color: #f3d1c8;
-      color: #fff;
-    }
-
-    .timer {
-      margin: 8px 0 6px;
-      text-align: center;
-      font-family: 'Playfair Display', serif;
-      font-style: italic;
-      font-size: 17px;
-      color: #444;
-    }
-
-    .countdown {
-      font-family: 'Bona Nova SC', serif;
-      font-size: 22px;
-      margin-top: 10px;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      color: #9a5f57;
-    }
-    .countdown span {
-      margin: 0 5px;
-    }
-
-    .footer-names {
-      font-family: 'Marck Script', cursive;
-      font-size: 34px;
-      margin-top: 10px;
-      color: #9a5f57;
-      user-select: none;
-    }
-    .footer-label {
-      font-size: 13px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #999;
-      margin-top: 18px;
-    }
-
-    /* ==================== АНИМАЦИЯЛАР ==================== */
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes cardIn {
-      from { opacity: 0; transform: translateY(30px) scale(0.98); }
-      to   { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @keyframes pulseMark {
-      0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(243,209,200,0.7); }
-      50%      { transform: scale(1.12); box-shadow: 0 0 0 6px rgba(243,209,200,0); }
-    }
-    @keyframes floatUp {
-      0%   { transform: translateY(0) rotate(0deg); opacity: 0; }
-      10%  { opacity: 0.7; }
-      90%  { opacity: 0.5; }
-      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-    }
-
-    .petals {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
-    }
-    .petal {
-      position: absolute;
-      bottom: -40px;
-      font-size: 18px;
-      color: #e3b3ac;
-      animation-name: floatUp;
-      animation-timing-function: linear;
-      animation-iteration-count: infinite;
-      user-select: none;
-    }
-  </style>
+  /* ---------- FOOTER ---------- */
+  footer{
+    text-align:center;
+    padding-bottom:70px;
+  }
+  footer .sign{
+    font-size:clamp(20px,6vw,26px);
+    font-style:italic;
+    color:var(--sky-deep);
+    margin:18px 0 22px;
+  }
+  footer .site{
+    font-size:12.5px;
+    color:var(--sky-deep);
+    word-break:break-all;
+    text-decoration:none;
+    border-bottom:1px solid var(--gold);
+    padding-bottom:2px;
+  }
+  footer .heart{
+    margin-top:26px;
+    color:var(--gold);
+    font-size:13px;
+    letter-spacing:.3em;
+  }
+</style>
 </head>
 <body>
-<div class="bg-bottom"></div>
-<div class="bg-top"></div>
-<div class="petals" id="petals"></div>
 
-<div class="container">
-  <div class="card" id="combinedCard">
-    <h1>Тойго чакыруу</h1>
+<div class="wrap">
 
-    <div class="section">
-      <div class="couple-names">Айбек<span class="and-sym">&amp;</span>Бубусара</div>
-
-      <div class="greeting">
-        Урматтуу
-        <span class="guest-name" id="guestName">меймандар</span>!
-      </div>
-
-      <div class="message">
-        Айбек менен Бубусаранын тин ак никелешүү тоюна сизди
-        чын дилибизден чакырабыз. Жүрөгүбүздүн эң кубанычтуу
-        күнүндө күбө болуп, той дасторконубуздан орун алууну сурайбыз.
-      </div>
-
-      <div class="date-block">
-        <div class="day-word">Жекшемби</div>
-        <div class="date-main">17-август, 2026</div>
-        <div class="date-time">саат 16:00</div>
-      </div>
-
-      <div class="final-text">Сиздерди күтөбүз!</div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-frame">
+      <span class="corner tl"></span>
+      <span class="corner tr"></span>
+      <span class="corner bl"></span>
+      <span class="corner br"></span>
     </div>
 
-    <div class="section">
-      <div class="final-text">Август</div>
-      <div class="calendar">
-        <div>Дш</div><div>Шш</div><div>Шр</div><div>Бш</div><div>Жм</div><div>Иш</div><div>Жш</div>
-        <div></div><div></div><div></div><div></div><div>1</div><div>2</div><div>3</div>
-        <div>4</div><div>5</div><div>6</div><div>7</div><div>8</div><div>9</div><div>10</div>
-        <div>11</div><div>12</div><div>13</div><div>14</div><div>15</div><div>16</div><div class="marked">17</div>
-        <div>18</div><div>19</div><div>20</div><div>21</div><div>22</div><div>23</div><div>24</div>
-        <div>25</div><div>26</div><div>27</div><div>28</div><div>29</div><div>30</div><div>31</div>
-      </div>
+    <div class="eyebrow reveal">Кыз узатуу</div>
 
-      <div class="info">
-        <strong>Өткөрүлүүчү жай:</strong><br>
-        Ош шаары,<br>
-        "Динат" ресторандар комплекси<br>
-        <a href="https://2gis.kg/bishkek/geo/70000001031367917"
-           target="_blank" rel="noopener noreferrer" class="map-link">
-          -  Картадан караңыз -
-        </a>
-      </div>
+    <svg class="ornament reveal reveal-delay-1" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5,20 C25,5 35,35 50,20 C58,12 62,28 70,20 C85,5 95,35 115,20"/>
+      <path d="M50,20 C50,12 60,12 60,20 C60,28 50,28 50,20 Z"/>
+    </svg>
 
-      <div class="timer" id="timer">
-        Тойго чейин калган убакыт:
-        <div class="countdown">
-          <span id="days">00</span>к
-          <span id="hours">00</span>с
-          <span id="minutes">00</span>м
-          <span id="seconds">00</span>с
-        </div>
-      </div>
-
-      <div class="footer-label">Терең урматтоо менен той ээлери</div>
-      <div class="footer-names">Аскарали, Бермет</div>
+    <div class="photo-frame reveal reveal-delay-1">
+      <span class="placeholder-text">колукту<br>сүрөтү<br>бул жерге</span>
+      <!-- Өз сүрөтүңүздү коюу үчүн: файлды ушул html менен бир папкага
+           "photo.jpg" деп сактап, же төмөнкү src'ти өз сүрөтүңүздүн
+           дарегине алмаштырыңыз -->
+      <img src="bride.jpg" alt="Бубусара" onerror="this.remove()">
     </div>
-  </div>
+
+    <h1 class="names reveal reveal-delay-2">
+      Айбек<span class="amp">&amp;</span>Бубусара
+    </h1>
+
+    <p class="hero-sub reveal reveal-delay-3">17-август, 2026-жыл &nbsp;·&nbsp; саат 16:00 &nbsp;·&nbsp; Ош шаары</p>
+
+    <div class="scroll-cue reveal reveal-delay-3">
+      <span></span>
+      Ылдый жылдырыңыз
+    </div>
+  </section>
+
+  <svg class="ornament reveal" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5,20 C25,5 35,35 50,20 C58,12 62,28 70,20 C85,5 95,35 115,20"/>
+    <path d="M50,20 C50,12 60,12 60,20 C60,28 50,28 50,20 Z"/>
+  </svg>
+
+  <!-- GREETING -->
+  <section class="greeting">
+    <div class="guest-name reveal" id="guestName">Урматтуу конок</div>
+    <p class="reveal reveal-delay-1">
+      Аскарали менен Берметтин үй-бүлөсү сиздерди кызыбыз Бубусара менен
+      Айбектин никелешип, көк дөбөт куш болушуна арналган
+      <strong>кыз узатуу</strong> тоюна чын жүрөктөн чакырат.
+      Сиздин ак тилегиңиз, батаңыз жана катышууңуз биз үчүн зор урмат
+      жана чоң кубаныч болмокчу.
+    </p>
+    <p class="parents reveal reveal-delay-2">Той ээлери: Аскарали &amp; Бермет</p>
+  </section>
+
+  <!-- COUNTDOWN -->
+  <section>
+    <div class="countdown-section reveal">
+      <div class="eyebrow">Тоюбузга чейин</div>
+      <h2>Санап баратабыз...</h2>
+      <div class="timer">
+        <div class="cell"><span class="num" id="cd-days">00</span><span class="label">Күн</span></div>
+        <div class="cell"><span class="num" id="cd-hours">00</span><span class="label">Саат</span></div>
+        <div class="cell"><span class="num" id="cd-mins">00</span><span class="label">Мүнөт</span></div>
+        <div class="cell"><span class="num" id="cd-secs">00</span><span class="label">Секунд</span></div>
+      </div>
+    </div>
+  </section>
+
+  <svg class="ornament reveal" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5,20 C25,5 35,35 50,20 C58,12 62,28 70,20 C85,5 95,35 115,20"/>
+    <path d="M50,20 C50,12 60,12 60,20 C60,28 50,28 50,20 Z"/>
+  </svg>
+
+  <!-- DATE / CALENDAR -->
+  <section class="date-section">
+    <div class="eyebrow reveal">Датасы</div>
+    <div class="date-big reveal reveal-delay-1">17-август</div>
+    <div class="date-time reveal reveal-delay-1">Дүйшөмбү &nbsp;·&nbsp; 2026-жыл &nbsp;·&nbsp; саат 16:00</div>
+
+    <div class="calendar reveal reveal-delay-2">
+      <div class="cal-month">Август, 2026</div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+  </section>
+
+  <svg class="ornament reveal" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5,20 C25,5 35,35 50,20 C58,12 62,28 70,20 C85,5 95,35 115,20"/>
+    <path d="M50,20 C50,12 60,12 60,20 C60,28 50,28 50,20 Z"/>
+  </svg>
+
+  <!-- LOCATION -->
+  <section class="location">
+    <div class="eyebrow reveal">Тоюбуз болот</div>
+    <div class="venue-name reveal reveal-delay-1">«Динат» ресторан</div>
+    <div class="venue-city reveal reveal-delay-1">Ош шаары</div>
+    <a class="map-btn reveal reveal-delay-2" href="https://2gis.kg/bishkek/geo/70000001031367917" target="_blank" rel="noopener">
+      Картадан көрүү
+    </a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <svg class="ornament reveal" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5,20 C25,5 35,35 50,20 C58,12 62,28 70,20 C85,5 95,35 115,20"/>
+      <path d="M50,20 C50,12 60,12 60,20 C60,28 50,28 50,20 Z"/>
+    </svg>
+    <div class="sign reveal reveal-delay-1">Сиздерди күтөбүз</div>
+    <a class="site reveal reveal-delay-2" href="https://bubusaraaibek.github.io/wedding/" target="_blank" rel="noopener">
+      bubusaraaibek.github.io/wedding
+    </a>
+    <div class="heart reveal reveal-delay-2">А &amp; Б · 2026</div>
+  </footer>
+
 </div>
 
 <script>
-  // ==================== Меймандын атын URL'дан алуу ====================
-  // Шилтеме мисалы: index.html?name=Азамат%20Азаматов
-  (function insertGuestName() {
+  // ---------- guest name from URL ----------
+  (function(){
     const params = new URLSearchParams(window.location.search);
-    const guestName = params.get('name') || params.get('ат') || params.get('to');
-    const guestEl = document.getElementById('guestName');
-    if (guestName && guestName.trim() !== '') {
-      guestEl.textContent = decodeURIComponent(guestName).trim();
+    const name = params.get('name');
+    if(name){
+      document.getElementById('guestName').textContent = 'Урматтуу, ' + decodeURIComponent(name) + '!';
     }
   })();
 
-  function startCountdown(targetTime) {
-    const daysEl = document.getElementById('days');
-    const hoursEl = document.getElementById('hours');
-    const minutesEl = document.getElementById('minutes');
-    const secondsEl = document.getElementById('seconds');
+  // ---------- scroll reveal ----------
+  (function(){
+    const els = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold:.18, rootMargin:'0px 0px -40px 0px' });
+    els.forEach(el=>io.observe(el));
+  })();
 
-    function updateTimer() {
-      const now = new Date().getTime();
-      let diff = targetTime - now;
+  // ---------- countdown ----------
+  (function(){
+    // Кыргызстан убактысы UTC+6
+    const target = new Date('2026-08-17T16:00:00+06:00').getTime();
+    const d = document.getElementById('cd-days');
+    const h = document.getElementById('cd-hours');
+    const m = document.getElementById('cd-mins');
+    const s = document.getElementById('cd-secs');
 
-      if (diff <= 0) {
-        daysEl.textContent = '00';
-        hoursEl.textContent = '00';
-        minutesEl.textContent = '00';
-        secondsEl.textContent = '00';
-        clearInterval(timerInterval);
-        return;
-      }
+    function pad(n){ return n.toString().padStart(2,'0'); }
 
-      const second = 1000;
-      const minute = second * 60;
-      const hour = minute * 60;
-      const day = hour * 24;
-
-      const days = Math.floor(diff / day);
-      const hours = Math.floor((diff % day) / hour);
-      const minutes = Math.floor((diff % hour) / minute);
-      const seconds = Math.floor((diff % minute) / second);
-
-      daysEl.textContent = days < 10 ? '0' + days : days;
-      hoursEl.textContent = hours < 10 ? '0' + hours : hours;
-      minutesEl.textContent = minutes < 10 ? '0' + minutes : minutes;
-      secondsEl.textContent = seconds < 10 ? '0' + seconds : seconds;
+    function tick(){
+      const now = Date.now();
+      let diff = target - now;
+      if(diff < 0) diff = 0;
+      const days = Math.floor(diff / 86400000);
+      const hours = Math.floor((diff % 86400000) / 3600000);
+      const mins = Math.floor((diff % 3600000) / 60000);
+      const secs = Math.floor((diff % 60000) / 1000);
+      d.textContent = pad(days);
+      h.textContent = pad(hours);
+      m.textContent = pad(mins);
+      s.textContent = pad(secs);
     }
+    tick();
+    setInterval(tick, 1000);
+  })();
 
-    updateTimer();
-    const timerInterval = setInterval(updateTimer, 1000);
-  }
+  // ---------- calendar grid (August 2026, Monday-first) ----------
+  (function(){
+    const grid = document.getElementById('calGrid');
+    const dows = ['Дү','Шр','Ша','Бй','Жм','Иш','Жк'];
+    dows.forEach(dw=>{
+      const el = document.createElement('div');
+      el.className = 'dow';
+      el.textContent = dw;
+      grid.appendChild(el);
+    });
 
-  const weddingDateStr = '2026-08-17T16:00:00';
-  const weddingDate = new Date(weddingDateStr).getTime();
+    const year = 2026, month = 7; // август индекс 7 (0-based)
+    const firstDay = new Date(year, month, 1);
+    let startCol = firstDay.getDay(); // 0=Вс..6=Сб
+    startCol = (startCol === 0) ? 6 : startCol - 1; // Дүйшөмбүдөн баштап
 
-  if (!isNaN(weddingDate)) {
-    startCountdown(weddingDate);
-  } else {
-    console.error('Ката: туура эмес дата форматы', weddingDateStr);
-    document.getElementById('timer').innerHTML = '<div>Таймер ката берди</div>';
-  }
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-  // ==================== Учуп жаткан жүрөкчөлөр ====================
-  (function createPetals() {
-    const container = document.getElementById('petals');
-    const symbols = ['♥', '❀', '✿'];
-    const count = 14;
-    for (let i = 0; i < count; i++) {
-      const el = document.createElement('span');
-      el.className = 'petal';
-      el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-      el.style.left = Math.random() * 100 + 'vw';
-      el.style.fontSize = (14 + Math.random() * 14) + 'px';
-      const duration = 10 + Math.random() * 12;
-      el.style.animationDuration = duration + 's';
-      el.style.animationDelay = (Math.random() * duration) + 's';
-      container.appendChild(el);
+    for(let i=0;i<startCol;i++){
+      const el = document.createElement('div');
+      el.className = 'day empty';
+      grid.appendChild(el);
+    }
+    for(let day=1; day<=daysInMonth; day++){
+      const el = document.createElement('div');
+      el.className = 'day' + (day === 17 ? ' highlight' : '');
+      el.textContent = day;
+      grid.appendChild(el);
     }
   })();
 </script>
+
 </body>
 </html>
