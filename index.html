@@ -49,7 +49,9 @@
       var(--cream);
     min-height:100vh;
   }
-
+.parents reveal reveal-delay-2{
+  font-size:20px;
+}
   section{
     padding:64px 28px;
     position:relative;
@@ -473,21 +475,15 @@
       Сиздин ак тилегиңиз, батаңыз жана катышууңуз биз үчүн зор урмат
       жана чоң кубаныч болмокчу.
     </p>
-    <p class="parents reveal reveal-delay-2">Той ээлери: Аскарали &amp; Бермет</p>
   </section>
 
   <!-- COUNTDOWN -->
-  <section>
-    <div class="countdown-section reveal">
-      <div class="eyebrow">Тоюбузга чейин</div>
-      <h2>Санап баратабыз...</h2>
-      <div class="timer">
-        <div class="cell"><span class="num" id="cd-days">00</span><span class="label">Күн</span></div>
-        <div class="cell"><span class="num" id="cd-hours">00</span><span class="label">Саат</span></div>
-        <div class="cell"><span class="num" id="cd-mins">00</span><span class="label">Мүнөт</span></div>
-        <div class="cell"><span class="num" id="cd-secs">00</span><span class="label">Секунд</span></div>
-      </div>
-    </div>
+  <section class="location">
+    <div class="venue-name reveal reveal-delay-1">«Динат» ресторан</div>
+    <div class="venue-city reveal reveal-delay-1">Ош шаары</div>
+    <a class="map-btn reveal reveal-delay-2" href="https://2gis.kg/bishkek/geo/70000001031367917" target="_blank" rel="noopener">
+      Картадан көрүү
+    </a>
   </section>
 
   <svg class="ornament reveal" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg">
@@ -497,7 +493,6 @@
 
   <!-- DATE / CALENDAR -->
   <section class="date-section">
-    <div class="eyebrow reveal">Датасы</div>
     <div class="date-big reveal reveal-delay-1">17-август</div>
     <div class="date-time reveal reveal-delay-1">Дүйшөмбү &nbsp;·&nbsp; 2026-жыл &nbsp;·&nbsp; саат 16:00</div>
 
@@ -512,15 +507,20 @@
     <path d="M50,20 C50,12 60,12 60,20 C60,28 50,28 50,20 Z"/>
   </svg>
 
-  <!-- LOCATION -->
-  <section class="location">
-    <div class="eyebrow reveal">Тоюбуз болот</div>
-    <div class="venue-name reveal reveal-delay-1">«Динат» ресторан</div>
-    <div class="venue-city reveal reveal-delay-1">Ош шаары</div>
-    <a class="map-btn reveal reveal-delay-2" href="https://2gis.kg/bishkek/geo/70000001031367917" target="_blank" rel="noopener">
-      Картадан көрүү
-    </a>
+    <section>
+    <div class="countdown-section reveal">
+      <div class="eyebrow">Тоюбузга чейин</div>
+      <h2>Санап баратабыз...</h2>
+      <div class="timer">
+        <div class="cell"><span class="num" id="cd-days">00</span><span class="label">Күн</span></div>
+        <div class="cell"><span class="num" id="cd-hours">00</span><span class="label">Саат</span></div>
+        <div class="cell"><span class="num" id="cd-mins">00</span><span class="label">Мүнөт</span></div>
+        <div class="cell"><span class="num" id="cd-secs">00</span><span class="label">Секунд</span></div>
+      </div>
+    </div>
   </section>
+
+  <!-- LOCATION -->
 
   <!-- FOOTER -->
   <footer>
@@ -529,10 +529,8 @@
       <path d="M50,20 C50,12 60,12 60,20 C60,28 50,28 50,20 Z"/>
     </svg>
     <div class="sign reveal reveal-delay-1">Сиздерди күтөбүз</div>
-    <a class="site reveal reveal-delay-2" href="https://bubusaraaibek.github.io/wedding/" target="_blank" rel="noopener">
-      bubusaraaibek.github.io/wedding
-    </a>
-    <div class="heart reveal reveal-delay-2">А &amp; Б · 2026</div>
+
+    <div class="parents reveal reveal-delay-2">Той ээлери: Аскарали &amp; Бермет</div>
   </footer>
 
 </div>
