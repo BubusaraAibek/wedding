@@ -4,20 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Bubusara | Тойго чакыруу</title>
-
-    <!-- Open Graph / превью ссылки в мессенджерах -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Bubusara | Тойго чакыруу">
-    <meta property="og:description" content="Сиздерди үйлөнүү тоюбузга чакырабыз!">
-    <meta property="og:image" content="https://bubusaraaibek.github.io/wedding/preview.png">
-    <meta property="og:url" content="https://bubusaraaibek.github.io/wedding/">
-
-    <!-- Twitter Card (кээ бир мессенджерлер аны да колдонот) -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Bubusara | Тойго чакыруу">
-    <meta name="twitter:description" content="Сиздерди үйлөнүү тоюбузга чакырабыз!">
-    <meta name="twitter:image" content="https://bubusaraaibek.github.io/wedding/preview.png">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -645,7 +631,7 @@
                 <div class="ornament-top fade-in">✦</div>
 
                 <div class="invitation-text fade-in delay-1">
-                    <strong id="greetingText">Урматтуу жана кадырлуу конокторубуз!</strong><br><br>
+                    <strong>Урматтуу жана кадырлуу конокторубуз!</strong><br><br>
                     Жүрөгүбүздөн чыккан кубанычыбызды сиздер менен бөлүшүүгө шашылабыз. Жашообуздагы эң маанилүү жана кайталангыс салтанаттуу күнүбүздүн кадырлуу коногу болууга чакырабыз.<br><br>
                     Сиздерди ак дасторкон үстүндө, жакшы маанайда, шайыр күлкү жана каалоо-тилектердин курчоосунда чын жүрөктөн күтөбүз!
                 </div>
@@ -743,16 +729,6 @@
     </div>
 
     <script>
-        // ===== ПЕРСОНАЛИЗАЦИЯ ПО ССЫЛКЕ =====
-        // Пример ссылки: https://bubusaraaibek.github.io/wedding/?name=Азамат%20Осмонов
-        (function personalizeGreeting() {
-            const params = new URLSearchParams(window.location.search);
-            const guestName = params.get('name');
-            if (guestName && guestName.trim()) {
-                document.getElementById('greetingText').textContent = 'Урматтуу ' + guestName.trim() + '!';
-            }
-        })();
-
         // ===== AUDIO (declared first, so the button works immediately) =====
         // Источник правды — audio.paused, а не отдельные флаги, чтобы не было рассинхронизации.
         const audio = document.getElementById('bg-audio');
