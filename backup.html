@@ -4,9 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Bubusara | Тойго чакыруу</title>
+
+    <!-- Open Graph / превью ссылки в мессенджерах -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Bubusara | Тойго чакыруу">
+    <meta property="og:description" content="Сиздерди үйлөнүү тоюбузга чакырабыз!">
+    <meta property="og:image" content="https://bubusaraaibek.github.io/wedding/preview.jpg">
+    <meta property="og:url" content="https://bubusaraaibek.github.io/wedding/">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+
+    <!-- Twitter Card (кээ бир мессенджерлер аны да колдонот) -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bubusara | Тойго чакыруу">
+    <meta name="twitter:description" content="Сиздерди үйлөнүү тоюбузга чакырабыз!">
+    <meta name="twitter:image" content="https://bubusaraaibek.github.io/wedding/preview.jpg">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -87,6 +105,19 @@
             100% { left: 100%; }
         }
 
+        /* ===== NAME MORPH CLONE ===== */
+        .name-clone {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10000;
+            pointer-events: none;
+            white-space: nowrap;
+            font-family: 'Cormorant Garamond', serif;
+            transform-origin: center center;
+            will-change: top, left, width, font-size, letter-spacing, color, opacity;
+        }
+
         /* ===== SCROLL CONTAINER ===== */
         .scroll-container {
             width: 100%;
@@ -95,6 +126,7 @@
             scroll-snap-type: y mandatory;
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
+            perspective: 1200px;
         }
 
         .page-section {
@@ -114,7 +146,7 @@
             background: var(--white);
             width: 100%;
             max-width: 400px;
-            min-height: 88vh;
+            min-height: 93vh;
             border-radius: 32px;
             box-shadow: 0 32px 80px rgba(26, 26, 26, 0.06);
             padding: 48px 28px;
@@ -126,6 +158,8 @@
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(184, 149, 106, 0.1);
+            will-change: transform, opacity, filter;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, filter 0.4s ease;
         }
 
         /* Corner ornaments */
@@ -146,6 +180,13 @@
             opacity: 0.6;
             width: 50px;
             height: 50px;
+        }
+
+        /* ===== HERO CARD BACKGROUND ===== */
+        .hero-card {
+            background-image: url('hero-bg2.png');
+            background-size: cover;
+            background-position: center;
         }
 
         .gold-line {
@@ -173,6 +214,7 @@
             line-height: 1;
             margin-bottom: 12px;
             letter-spacing: 4px;
+            transition: opacity 0.35s ease;
         }
 
         .sub-title {
@@ -238,7 +280,7 @@
             color: var(--gold);
             letter-spacing: 4px;
             text-transform: uppercase;
-            font-weight: 500;
+            font-weight: 1000;
         }
         .scroll-arrow {
             width: 24px;
@@ -461,7 +503,7 @@
             opacity: 0;
             transform: translateY(30px);
             transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1),
-                        transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+            transform 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .fade-in.visible {
             opacity: 1;
@@ -478,7 +520,7 @@
             opacity: 0;
             transform: scale(0.9);
             transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1),
-                        transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
         .scale-in.visible {
             opacity: 1;
@@ -563,261 +605,449 @@
             .date-display { font-size: 52px; }
         }
     </style>
-<base target="_blank">
+    <base target="_blank">
 </head>
 <body>
 
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-name">BUBUSARA</div>
-        <div class="loading-line"></div>
-    </div>
+<!-- Loading Screen -->
+<div class="loading-screen" id="loadingScreen">
+    <div class="loading-name" id="loadingName">BUBUSARA</div>
+    <div class="loading-line"></div>
+</div>
 
-    <!-- Floating Particles -->
-    <div class="particles-container" id="particles"></div>
+<!-- Floating Particles -->
+<div class="particles-container" id="particles"></div>
 
-    <!-- Audio -->
-    <audio id="bg-audio" loop preload="auto">
-        <source src="aud.mp3" type="audio/mpeg">
-    </audio>
-    <button class="audio-btn" id="audioBtn" onclick="toggleAudio()" aria-label="Музыка">
-        <svg viewBox="0 0 24 24" id="audioIcon">
-            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-        </svg>
-    </button>
+<!-- Audio -->
+<audio id="bg-audio" loop preload="auto">
+    <source src="muson.m4a" type="audio/mp4">
+</audio>
+<button class="audio-btn" id="audioBtn" onclick="toggleAudio()" aria-label="Музыка">
+    <svg viewBox="0 0 24 24" id="audioIcon">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+    </svg>
+</button>
 
-    <div class="scroll-container" id="scrollContainer">
+<div class="scroll-container" id="scrollContainer">
 
-        <!-- ===== SCREEN 1: HERO ===== -->
-        <section class="page-section">
-            <div class="invitation-card">
-                <div class="corner corner-tl"></div>
-                <div class="corner corner-tr"></div>
-                <div class="corner corner-bl"></div>
-                <div class="corner corner-br"></div>
+    <!-- ===== SCREEN 1: HERO ===== -->
+    <section class="page-section">
+        <div class="invitation-card hero-card">
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
 
-                <div class="label fade-in" style="font-size:12px; font-weight:bold">Тойго чакыруу</div>
-                <div class="bride-name fade-in delay-1">Bubusara</div>
+            <div class="label fade-in" style="font-size:12px; font-weight:bold">Тойго чакыруу</div>
+            <div class="bride-name" id="heroName" style="opacity:0;">Bubusara</div>
 
-                <div class="gold-line fade-in delay-2"></div>
+            <div class="gold-line fade-in delay-2"></div>
 
 
+            <div class="sub-title fade-in delay-3" style="font-size:12px; font-weight:bold">Кыз узатуу</div>
 
-                <div class="sub-title fade-in delay-3" style="font-size:12px; font-weight:bold">Кыз узатуу</div>
+            <div class="scroll-hint fade-in delay-5" onclick="scrollToNext()">
+                <span>Ылдый түртүңүз</span>
+                <svg class="scroll-arrow" viewBox="0 0 24 24">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </div>
+        </div>
+    </section>
 
-                <div class="photo-wrapper fade-in delay-4">
-                    <div class="photo-glow"></div>
-                    <div class="photo-frame">
-                        <img src="ne.png" alt="Bubusara">
-                    </div>
-                </div>
+    <!-- ===== SCREEN 2: INVITATION TEXT ===== -->
+    <section class="page-section">
+        <div class="invitation-card">
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
 
-                <div class="scroll-hint fade-in delay-5" onclick="scrollToNext()">
-                    <span>Ылдый түртүңүз</span>
-                    <svg class="scroll-arrow" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+            <div class="ornament-top fade-in">✦</div>
+
+            <div class="invitation-text fade-in delay-1">
+                <strong id="greetingText">Урматтуу жана кадырлуу конокторубуз!</strong><br><br>
+                Жүрөгүбүздөн чыккан кубанычыбызды сиздер менен бөлүшүүгө шашылабыз. Жашообуздагы эң маанилүү жана
+                кайталангыс күнүбүздүн кадырлуу коногу болууга чакырабыз.
+            </div>
+
+            <div class="ornament-bottom fade-in delay-2">✦</div>
+
+            <div class="hosts-section fade-in delay-3">
+                <div class="respect-text">Терең урматтоо менен</div>
+                <div class="hosts-names">Аскарали & Бермет</div>
+            </div>
+
+            <div class="scroll-hint" style="margin-top: 24px;" onclick="scrollToNext()">
+                <span>Ылдый түртүңүз</span>
+                <svg class="scroll-arrow" viewBox="0 0 24 24">
+                    <path d="M12 5v14M5 12l7 7 7-7"/>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SCREEN 3: DATE & LOCATION ===== -->
+    <section class="page-section">
+        <div class="invitation-card">
+            <div class="corner corner-tl"></div>
+            <div class="corner corner-tr"></div>
+            <div class="corner corner-bl"></div>
+            <div class="corner corner-br"></div>
+
+            <div class="label fade-in" style=" font-weight:bold">Үйлөнүү үлпөт күнү</div>
+
+            <div class="date-display fade-in delay-1">17.08.2026</div>
+            <div class="time-display fade-in delay-2">16:00</div>
+
+
+            <!-- Calendar -->
+            <div class="calendar-wrapper fade-in delay-4">
+                <div class="calendar-month" style=" font-weight:bold">Август 2026</div>
+                <div class="calendar-grid">
+                    <div class="cal-header">Дш</div>
+                    <div class="cal-header">Шш</div>
+                    <div class="cal-header">Шр</div>
+                    <div class="cal-header">Бш</div>
+                    <div class="cal-header">Жм</div>
+                    <div class="cal-header">Иш</div>
+                    <div class="cal-header">Жш</div>
+
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day empty"></div>
+                    <div class="cal-day">1</div>
+                    <div class="cal-day">2</div>
+                    <div class="cal-day">3</div>
+                    <div class="cal-day">4</div>
+                    <div class="cal-day">5</div>
+                    <div class="cal-day">6</div>
+                    <div class="cal-day">7</div>
+                    <div class="cal-day">8</div>
+                    <div class="cal-day">9</div>
+                    <div class="cal-day">10</div>
+                    <div class="cal-day">11</div>
+                    <div class="cal-day">12</div>
+                    <div class="cal-day">13</div>
+                    <div class="cal-day">14</div>
+                    <div class="cal-day">15</div>
+                    <div class="cal-day">16</div>
+                    <div class="cal-day wedding">17</div>
+                    <div class="cal-day">18</div>
+                    <div class="cal-day">19</div>
+                    <div class="cal-day">20</div>
+                    <div class="cal-day">21</div>
+                    <div class="cal-day">22</div>
+                    <div class="cal-day">23</div>
+                    <div class="cal-day">24</div>
+                    <div class="cal-day">25</div>
+                    <div class="cal-day">26</div>
+                    <div class="cal-day">27</div>
+                    <div class="cal-day">28</div>
+                    <div class="cal-day">29</div>
+                    <div class="cal-day">30</div>
+                    <div class="cal-day">31</div>
                 </div>
             </div>
-        </section>
 
-        <!-- ===== SCREEN 2: INVITATION TEXT ===== -->
-        <section class="page-section">
-            <div class="invitation-card">
-                <div class="corner corner-tl"></div>
-                <div class="corner corner-tr"></div>
-                <div class="corner corner-bl"></div>
-                <div class="corner corner-br"></div>
+            <div class="location-label fade-in delay-5" style=" font-weight:bold">Дареги</div>
+            <div class="restaurant-name fade-in delay-5">«Динат»</div>
+            <div class="address-text fade-in delay-5">Ош шаары</div>
 
-                <div class="ornament-top fade-in">✦</div>
+            <a href="https://2gis.kg/bishkek/geo/70000001031367917" target="_blank" class="btn-map fade-in delay-6">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+                Картаны караңыз
+            </a>
+        </div>
+    </section>
 
-                <div class="invitation-text fade-in delay-1">
-                    <strong>Урматтуу жана кадырлуу конокторубуз!</strong><br><br>
-                    Жүрөгүбүздөн чыккан кубанычыбызды сиздер менен бөлүшүүгө шашылабыз. Жашообуздагы эң маанилүү жана кайталангыс салтанаттуу күнүбүздүн кадырлуу коногу болууга чакырабыз.<br><br>
-                    Сиздерди ак дасторкон үстүндө, жакшы маанайда, шайыр күлкү жана каалоо-тилектердин курчоосунда чын жүрөктөн күтөбүз!
-                </div>
+</div>
 
-                <div class="ornament-bottom fade-in delay-2">✦</div>
-
-                <div class="hosts-section fade-in delay-3">
-                    <div class="respect-text">Терең урматтоо менен</div>
-                    <div class="hosts-names">Аскарали & Бермет</div>
-                </div>
-
-                <div class="scroll-hint" style="margin-top: 24px;" onclick="scrollToNext()">
-                    <span>Ылдый түртүңүз</span>
-                    <svg class="scroll-arrow" viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== SCREEN 3: DATE & LOCATION ===== -->
-        <section class="page-section">
-            <div class="invitation-card">
-                <div class="corner corner-tl"></div>
-                <div class="corner corner-tr"></div>
-                <div class="corner corner-bl"></div>
-                <div class="corner corner-br"></div>
-
-                <div class="label fade-in" style=" font-weight:bold">Үйлөнүү үлпөт күнү</div>
-
-                <div class="date-display fade-in delay-1">17.08.2026</div>
-                <div class="time-display fade-in delay-2">16:00</div>
-
-
-                <!-- Calendar -->
-                <div class="calendar-wrapper fade-in delay-4">
-                    <div class="calendar-month" style=" font-weight:bold">Август 2026</div>
-                    <div class="calendar-grid">
-                        <div class="cal-header">Дш</div>
-                        <div class="cal-header">Шш</div>
-                        <div class="cal-header">Шр</div>
-                        <div class="cal-header">Бш</div>
-                        <div class="cal-header">Жм</div>
-                        <div class="cal-header">Иш</div>
-                        <div class="cal-header">Жш</div>
-
-                        <div class="cal-day empty"></div>
-                        <div class="cal-day empty"></div>
-                        <div class="cal-day empty"></div>
-                        <div class="cal-day empty"></div>
-                        <div class="cal-day empty"></div>
-                        <div class="cal-day">1</div>
-                        <div class="cal-day">2</div>
-                        <div class="cal-day">3</div>
-                        <div class="cal-day">4</div>
-                        <div class="cal-day">5</div>
-                        <div class="cal-day">6</div>
-                        <div class="cal-day">7</div>
-                        <div class="cal-day">8</div>
-                        <div class="cal-day">9</div>
-                        <div class="cal-day">10</div>
-                        <div class="cal-day">11</div>
-                        <div class="cal-day">12</div>
-                        <div class="cal-day">13</div>
-                        <div class="cal-day">14</div>
-                        <div class="cal-day">15</div>
-                        <div class="cal-day">16</div>
-                        <div class="cal-day wedding">17</div>
-                        <div class="cal-day">18</div>
-                        <div class="cal-day">19</div>
-                        <div class="cal-day">20</div>
-                        <div class="cal-day">21</div>
-                        <div class="cal-day">22</div>
-                        <div class="cal-day">23</div>
-                        <div class="cal-day">24</div>
-                        <div class="cal-day">25</div>
-                        <div class="cal-day">26</div>
-                        <div class="cal-day">27</div>
-                        <div class="cal-day">28</div>
-                        <div class="cal-day">29</div>
-                        <div class="cal-day">30</div>
-                        <div class="cal-day">31</div>
-                    </div>
-                </div>
-
-                <div class="location-label fade-in delay-5" style=" font-weight:bold">Дареги</div>
-                <div class="restaurant-name fade-in delay-5">«Динат»</div>
-                <div class="address-text fade-in delay-5">Ош шаары</div>
-
-                <a href="https://2gis.kg/bishkek/geo/70000001031367917" target="_blank" class="btn-map fade-in delay-6">
-                    <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    Картаны караңыз
-                </a>
-            </div>
-        </section>
-
-    </div>
-
-    <script>
-        // ===== AUDIO (declared first, so the button works immediately) =====
-        // Источник правды — audio.paused, а не отдельные флаги, чтобы не было рассинхронизации.
-        const audio = document.getElementById('bg-audio');
-        const audioBtn = document.getElementById('audioBtn');
-        const audioIcon = document.getElementById('audioIcon');
-        let audioStarted = false; // нужен только для авто-старта при первом скролле
-
-        const iconPlay = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>`;
-        const iconMute = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>`;
-
-        function toggleAudio() {
-            if (audio.paused) {
-                audio.play().then(() => {
-                    audioStarted = true;
-                    audioBtn.classList.add('playing');
-                    audioIcon.innerHTML = iconPlay;
-                }).catch((err) => {
-                    console.error('Аудио ойнотулган жок:', err);
-                });
-            } else {
-                audio.pause();
-                audioBtn.classList.remove('playing');
-                audioIcon.innerHTML = iconMute;
-            }
+<script>
+    // ===== ПЕРСОНАЛИЗАЦИЯ ПО ССЫЛКЕ =====
+    // Пример ссылки: https://bubusaraaibek.github.io/wedding/?name=Азамат%20Осмонов
+    (function personalizeGreeting() {
+        const params = new URLSearchParams(window.location.search);
+        const guestName = params.get('name');
+        if (guestName && guestName.trim()) {
+            document.getElementById('greetingText').textContent = 'Урматтуу ' + guestName.trim() + '!';
         }
+    })();
 
-        // ===== LOADING SCREEN =====
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hidden');
-                // Trigger first screen animations
-                setTimeout(() => {
-                    document.querySelector('.page-section:first-child').querySelectorAll('.fade-in, .scale-in').forEach((el, i) => {
-                        setTimeout(() => el.classList.add('visible'), i * 120);
-                    });
-                }, 400);
-            }, 2000);
-        });
+    // ===== AUDIO =====
+    // Источник правды — audio.paused, а не отдельные флаги, чтобы не было рассинхронизации.
+    const audio = document.getElementById('bg-audio');
+    const audioBtn = document.getElementById('audioBtn');
+    const audioIcon = document.getElementById('audioIcon');
+    let audioStarted = false;
 
-        // ===== FLOATING PARTICLES =====
-        function createParticles() {
-            const container = document.getElementById('particles');
-            const particleCount = 12;
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 8 + 's';
-                particle.style.animationDuration = (6 + Math.random() * 6) + 's';
-                particle.style.width = (2 + Math.random() * 4) + 'px';
-                particle.style.height = particle.style.width;
-                container.appendChild(particle);
-            }
-        }
-        createParticles();
+    const iconPlay = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>`;
+    const iconMute = `<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line>`;
 
-        // ===== INTERSECTION OBSERVER =====
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.fade-in, .scale-in').forEach((el, i) => {
-                        setTimeout(() => el.classList.add('visible'), i * 100);
-                    });
-                }
+    function toggleAudio() {
+        if (audio.paused) {
+            audio.play().then(() => {
+                audioStarted = true;
+                audioBtn.classList.add('playing');
+                audioIcon.innerHTML = iconPlay;
+            }).catch((err) => {
+                console.error('Аудио ойнотулган жок:', err);
             });
-        }, { threshold: 0.2 });
+        } else {
+            audio.pause();
+            audioBtn.classList.remove('playing');
+            audioIcon.innerHTML = iconMute;
+        }
+    }
 
-        document.querySelectorAll('.page-section').forEach(section => {
-            observer.observe(section);
+    // ===== NAME MORPH: "BUBUSARA" (loading) -> "Bubusara" (hero) =====
+    function morphNameToHero(onDone) {
+        const loadingName = document.getElementById('loadingName');
+        const heroName = document.getElementById('heroName');
+        const loadingScreen = document.getElementById('loadingScreen');
+
+        if (!loadingName || !heroName) { onDone && onDone(); return; }
+
+        const startRect = loadingName.getBoundingClientRect();
+        const startStyle = getComputedStyle(loadingName);
+
+        // Делаем героя видимым для замера позиции, но невидимым визуально
+        heroName.style.opacity = '0';
+        heroName.style.visibility = 'hidden';
+        heroName.style.display = 'block';
+        const endRect = heroName.getBoundingClientRect();
+        const endStyle = getComputedStyle(heroName);
+        heroName.style.visibility = '';
+
+        // Создаём клон, который будет "перетекать" из одного состояния в другое
+        const clone = document.createElement('div');
+        clone.className = 'name-clone';
+        clone.textContent = loadingName.textContent;
+        clone.style.top = startRect.top + 'px';
+        clone.style.left = startRect.left + 'px';
+        clone.style.width = startRect.width + 'px';
+        clone.style.fontSize = startStyle.fontSize;
+        clone.style.fontWeight = startStyle.fontWeight;
+        clone.style.letterSpacing = startStyle.letterSpacing;
+        clone.style.color = startStyle.color;
+        clone.style.textAlign = 'center';
+        clone.style.opacity = '1';
+        clone.style.transition = 'top 0.9s cubic-bezier(0.65,0,0.35,1), left 0.9s cubic-bezier(0.65,0,0.35,1), width 0.9s cubic-bezier(0.65,0,0.35,1), font-size 0.9s cubic-bezier(0.65,0,0.35,1), letter-spacing 0.9s cubic-bezier(0.65,0,0.35,1), color 0.9s ease, transform 0.9s cubic-bezier(0.65,0,0.35,1)';
+        document.body.appendChild(clone);
+
+        // Прячем исходный текст на загрузочном экране, чтобы не было дублей
+        loadingName.style.transition = 'opacity 0.3s ease';
+        loadingName.style.opacity = '0';
+
+        // Стартуем скрытие загрузочного экрана
+        loadingScreen.classList.add('hidden');
+
+        // На следующем кадре запускаем анимацию клона к позиции/стилю героя
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                clone.style.top = endRect.top + 'px';
+                clone.style.left = endRect.left + 'px';
+                clone.style.width = endRect.width + 'px';
+                clone.style.fontSize = endStyle.fontSize;
+                clone.style.fontWeight = endStyle.fontWeight;
+                clone.style.letterSpacing = endStyle.letterSpacing;
+                clone.style.color = endStyle.color;
+            });
         });
 
-        // ===== AUTO-START AUDIO ON FIRST SCROLL =====
-        const scrollContainer = document.getElementById('scrollContainer');
-        scrollContainer.addEventListener('scroll', function autoStart() {
-            if (audio.paused && !audioStarted) toggleAudio();
-            scrollContainer.removeEventListener('scroll', autoStart);
-        }, { once: true });
+        // По завершении — кроссфейд клона в настоящий текст героя
+        setTimeout(() => {
+            heroName.style.opacity = '1';
+            clone.style.transition = 'opacity 0.35s ease';
+            clone.style.opacity = '0';
+            setTimeout(() => {
+                clone.remove();
+                onDone && onDone();
+            }, 380);
+        }, 950);
+    }
 
-        // ===== SCROLL TO NEXT =====
-        function scrollToNext() {
-            const current = scrollContainer.scrollTop;
-            const sections = document.querySelectorAll('.page-section');
-            for (let section of sections) {
-                if (section.offsetTop > current + 50) {
-                    scrollContainer.scrollTo({ top: section.offsetTop, behavior: 'smooth' });
-                    break;
-                }
+    function revealHeroExtras() {
+        const firstSection = document.querySelector('.page-section:first-child');
+        firstSection.querySelectorAll('.fade-in, .scale-in').forEach((el, i) => {
+            setTimeout(() => el.classList.add('visible'), i * 130);
+        });
+    }
+
+    // ===== LOADING SCREEN =====
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            morphNameToHero(() => {
+                revealHeroExtras();
+            });
+        }, 1300);
+    });
+
+    // ===== FLOATING PARTICLES =====
+    function createParticles() {
+        const container = document.getElementById('particles');
+        const particleCount = 12;
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particle.style.animationDuration = (6 + Math.random() * 6) + 's';
+            particle.style.width = (2 + Math.random() * 4) + 'px';
+            particle.style.height = particle.style.width;
+            container.appendChild(particle);
+        }
+    }
+    createParticles();
+
+    // ===== INTERSECTION OBSERVER =====
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.fade-in, .scale-in').forEach((el, i) => {
+                    setTimeout(() => el.classList.add('visible'), i * 100);
+                });
+            }
+        });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.page-section').forEach(section => {
+        observer.observe(section);
+    });
+
+    // ===== SCROLL-LINKED TRANSITIONS BETWEEN SLIDES =====
+    // Карточка плавно уменьшается, слегка наклоняется и тускнеет,
+    // пока не окажется точно по центру экрана — эффект "падения в кадр".
+    const scrollContainer = document.getElementById('scrollContainer');
+    const allSections = document.querySelectorAll('.page-section');
+    let scrollTicking = false;
+
+    function updateSectionTransforms() {
+        const containerRect = scrollContainer.getBoundingClientRect();
+        const centerY = containerRect.top + containerRect.height / 2;
+
+        allSections.forEach(section => {
+            const card = section.querySelector('.invitation-card');
+            if (!card) return;
+            const rect = section.getBoundingClientRect();
+            const sectionCenter = rect.top + rect.height / 2;
+            const dist = (sectionCenter - centerY) / containerRect.height;
+            const clamped = Math.max(-1, Math.min(1, dist));
+
+            const scale = 1 - Math.min(Math.abs(clamped) * 0.16, 0.16);
+            const tilt = clamped * 10;
+            const opacity = 1 - Math.min(Math.abs(clamped) * 0.75, 0.7);
+            const blur = Math.min(Math.abs(clamped) * 4, 4);
+
+            card.style.transform = `perspective(1200px) rotateX(${-tilt}deg) scale(${scale})`;
+            card.style.opacity = opacity;
+            card.style.filter = `blur(${blur}px)`;
+        });
+        scrollTicking = false;
+    }
+
+    scrollContainer.addEventListener('scroll', () => {
+        if (!scrollTicking) {
+            requestAnimationFrame(updateSectionTransforms);
+            scrollTicking = true;
+        }
+    }, { passive: true });
+
+    window.addEventListener('load', updateSectionTransforms);
+    window.addEventListener('resize', updateSectionTransforms);
+
+    // ===== AUTO-START AUDIO =====
+    function attemptAutoplay() {
+        if (audio.paused) {
+            audio.play().then(() => {
+                audioStarted = true;
+                audioBtn.classList.add('playing');
+                audioIcon.innerHTML = iconPlay;
+            }).catch(() => {
+                // Заблокировано браузером — подождём первое взаимодействие
+            });
+        }
+    }
+    attemptAutoplay();
+
+    const startOnFirstInteraction = () => {
+        if (!audioStarted) attemptAutoplay();
+    };
+    ['click', 'touchstart', 'scroll', 'keydown', 'pointerdown'].forEach(evt => {
+        document.addEventListener(evt, startOnFirstInteraction, { once: true, capture: true });
+    });
+
+    // ===== АВТОМАТИЧЕСКИЙ СКРОЛЛ МЕЖДУ БЛОКАМИ =====
+    // Блок 1 -> Блок 2: через некоторое время после появления имени
+    // Блок 2 -> Блок 3: через некоторое время после второго блока
+    // Если пользователь сам начинает листать вручную — автопереход отменяется.
+    (function autoAdvance() {
+        const sections = document.querySelectorAll('.page-section');
+        if (sections.length < 3) return;
+
+        let userTookOver = false;
+        let timers = [];
+
+        function cancelAutoAdvance() {
+            userTookOver = true;
+            timers.forEach(t => clearTimeout(t));
+        }
+
+        // Ручное вмешательство: колесо мыши, тач-свайп, клавиши прокрутки, клик по подсказке
+        ['wheel', 'touchmove', 'keydown'].forEach(evt => {
+            scrollContainer.addEventListener(evt, cancelAutoAdvance, { once: true, passive: true });
+        });
+        document.querySelectorAll('.scroll-hint').forEach(hint => {
+            hint.addEventListener('click', cancelAutoAdvance, { once: true });
+        });
+
+        function goToSection(index) {
+            if (userTookOver) return;
+            scrollContainer.scrollTo({ top: sections[index].offsetTop, behavior: 'smooth' });
+        }
+
+        window.addEventListener('load', () => {
+            const t1 = setTimeout(() => {
+                goToSection(1); // блок 1 -> блок 2
+                const t2 = setTimeout(() => {
+                    goToSection(2); // блок 2 -> блок 3
+                }, 7000);
+                timers.push(t2);
+            }, 5500);
+            timers.push(t1);
+        });
+    })();
+
+    // ===== SCROLL TO NEXT =====
+    function scrollToNext() {
+        const current = scrollContainer.scrollTop;
+        const sections = document.querySelectorAll('.page-section');
+        for (let section of sections) {
+            if (section.offsetTop > current + 50) {
+                scrollContainer.scrollTo({ top: section.offsetTop, behavior: 'smooth' });
+                break;
             }
         }
-    </script>
+    }
+
+    // ===== ПАУЗА ПРИ УХОДЕ СО ВКЛАДКИ =====
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            audio.pause();
+            audioBtn.classList.remove("playing");
+            audioIcon.innerHTML = iconMute;
+        } else if (audioStarted) {
+            audio.play().catch(() => {});
+            audioBtn.classList.add("playing");
+            audioIcon.innerHTML = iconPlay;
+        }
+    });
+</script>
 </body>
 </html>
