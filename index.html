@@ -745,7 +745,7 @@
 
 <!-- Audio -->
 <audio id="bg-audio" loop preload="auto">
-    <source src="muson.m4a" type="audio/mp4">
+    <source src="s.mp3" type="audio/mp3">
 </audio>
 <button class="audio-btn" id="audioBtn" onclick="toggleAudio()" aria-label="Музыка">
     <svg viewBox="0 0 24 24" id="audioIcon">
@@ -770,7 +770,7 @@
             <div class="label fade-in" style="font-size:12px; font-weight:bold">Кыз узатууга чакыруу</div>
 
 
-<!--            <div class="sub-title fade-in delay-3" style="font-size:12px; font-weight:bold">Кыз узатуу</div>-->
+            <!--            <div class="sub-title fade-in delay-3" style="font-size:12px; font-weight:bold">Кыз узатуу</div>-->
 
             <div class="scroll-hint fade-in delay-5" onclick="scrollToNext()">
                 <span>Ылдый түртүңүз</span>
@@ -793,10 +793,11 @@
 
             <div class="invitation-text fade-in delay-1">
                 <strong id="greetingText">Урматтуу жана кадырлуу конокторубуз!</strong><br><br>
-                Бул күн биз үчүн өзгөчө маанилүү болот жана биз аны сүйүктүү тамдарыбыз жана досторубуздун курчоосунда өткөргүбүз келет! Биз сиздерди кызыбыз Бүбүсаранын узатуусуна чакырганыбызга абдан кубанычтабыз!
+                Бул күн биз үчүн өзгөчө маанилүү болот жана биз аны сүйүктүү тамдарыбыз жана досторубуздун курчоосунда
+                өткөргүбүз келет! Биз сиздерди кызыбыз Бүбүсаранын узатуусуна чакырганыбызга абдан кубанычтабыз!
             </div>
 
-<!--            <div class="ornament-bottom fade-in delay-2">✦</div>-->
+            <!--            <div class="ornament-bottom fade-in delay-2">✦</div>-->
 
             <div class="hosts-section fade-in delay-3">
                 <div class="respect-text">Терең урматтоо менен</div>
@@ -820,7 +821,7 @@
             <div class="corner corner-bl"></div>
             <div class="corner corner-br"></div>
 
-<!--            <div class="label fade-in" style=" font-weight:bold">Үйлөнүү үлпөт күнү</div>-->
+            <!--            <div class="label fade-in" style=" font-weight:bold">Үйлөнүү үлпөт күнү</div>-->
 
             <div class="date-display fade-in delay-1">17.08.2026</div>
             <div class="time-display fade-in delay-2">16:00</div>
@@ -1039,6 +1040,14 @@
         envelopeOpened = true;
         envelope.classList.add('opened');
 
+        const startFromTwenty = () => {
+            try { audio.currentTime = 20; } catch (e) {}
+        };
+        if (audio.readyState >= 1) {
+            startFromTwenty();
+        } else {
+            audio.addEventListener('loadedmetadata', startFromTwenty, { once: true });
+        }
         audio.play().then(() => {
             audioStarted = true;
             audioBtn.classList.add('playing');
